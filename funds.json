@@ -10,19 +10,13 @@
   "funds": [
     { "code": "017641", "name": "摩根标普500指数(QDII) 人民币A", "firm": "摩根", "currency": "CNY", "note": "费率最低 0.65%/年，当前唯一可买的人民币份额之一" },
     { "code": "019305", "name": "摩根标普500指数(QDII) 人民币C", "firm": "摩根", "currency": "CNY", "note": "与A份额额度独立，可叠加买入" },
-    { "code": "017643", "name": "摩根标普500指数(QDII) 美汇", "firm": "摩根", "currency": "USD", "note": "美元份额" },
-    { "code": "017642", "name": "摩根标普500指数(QDII) 美钞", "firm": "摩根", "currency": "USD", "note": "美元份额" },
 
     { "code": "050025", "name": "博时标普500ETF联接 A", "firm": "博时", "currency": "CNY", "note": "规模最大，长期持有选A" },
     { "code": "006075", "name": "博时标普500ETF联接 C", "firm": "博时", "currency": "CNY", "note": "短期持有选C" },
     { "code": "018738", "name": "博时标普500ETF联接 E(人民币)", "firm": "博时", "currency": "CNY", "note": "原额度最宽松的一档，2026-08-19 起暂停" },
-    { "code": "013425", "name": "博时标普500ETF联接 美元汇A", "firm": "博时", "currency": "USD", "note": "美元份额" },
-    { "code": "013499", "name": "博时标普500ETF联接 美元汇C", "firm": "博时", "currency": "USD", "note": "美元份额" },
 
     { "code": "161125", "name": "易方达标普500指数(QDII-LOF) 人民币A", "firm": "易方达", "currency": "CNY", "note": "LOF，场内场外同代码" },
     { "code": "012860", "name": "易方达标普500指数(QDII-LOF) 人民币C", "firm": "易方达", "currency": "CNY", "note": "" },
-    { "code": "003718", "name": "易方达标普500指数 美元汇A", "firm": "易方达", "currency": "USD", "note": "美元份额" },
-    { "code": "012861", "name": "易方达标普500指数 美元汇C", "firm": "易方达", "currency": "USD", "note": "美元份额" },
 
     { "code": "007721", "name": "天弘标普500发起(QDII-FOF) A", "firm": "天弘", "currency": "CNY", "note": "FOF 形式，2026-01-07 起暂停" },
     { "code": "007722", "name": "天弘标普500发起(QDII-FOF) C", "firm": "天弘", "currency": "CNY", "note": "" },
@@ -30,7 +24,6 @@
 
     { "code": "018064", "name": "华夏标普500ETF发起式联接(QDII) A人民币", "firm": "华夏", "currency": "CNY", "note": "直销 8/10 起暂停" },
     { "code": "018065", "name": "华夏标普500ETF发起式联接(QDII) C", "firm": "华夏", "currency": "CNY", "note": "" },
-    { "code": "018066", "name": "华夏标普500ETF发起式联接(QDII) A美元", "firm": "华夏", "currency": "USD", "note": "美元份额" },
 
     { "code": "017028", "name": "国泰标普500ETF发起联接(QDII) A人民币", "firm": "国泰", "currency": "CNY", "note": "" },
     { "code": "017030", "name": "国泰标普500ETF发起联接(QDII) C人民币", "firm": "国泰", "currency": "CNY", "note": "" }
