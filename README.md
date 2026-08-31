@@ -10,7 +10,59 @@
 - 零第三方依赖，Python 3.7+ 直接运行
 - 适合 GitHub Actions 免费托管
 
-## 快速开始
+## 其他用户使用教程（Fork 方式）
+
+如果你想使用这个项目监控自己的标普500基金额度，可以通过 Fork 的方式：
+
+### 1. Fork 仓库
+
+1. 访问项目仓库：https://github.com/你的用户名/sp500-quota-watch
+2. 点击右上角的 **Fork** 按钮
+3. 选择你的 GitHub 账号，等待 Fork 完成
+
+### 2. 配置 Secrets
+
+1. 进入你 Fork 后的仓库
+2. 点击 **Settings** → **Secrets and variables** → **Actions**
+3. 点击 **New repository secret**
+4. 添加推送渠道密钥：
+   - `SCT_KEY`：Server酱密钥（sctp 开头）
+   - `BARK_KEY`：Bark 密钥
+
+### 3. 启用 GitHub Actions
+
+1. 在你的仓库中，点击 **Actions** 选项卡
+2. 如果看到 " workflows aren't being run on this forked repository" 的提示，点击 **I understand my workflows, go ahead and enable them**
+3. GitHub Actions 会自动启用
+
+### 4. 自定义监控的基金（可选）
+
+如果你只想监控特定的基金，可以编辑 `funds.json` 文件，只保留你关心的基金：
+
+```json
+{
+  "funds": [
+    { "code": "017641", "name": "摩根标普500指数(QDII) 人民币A", "firm": "摩根", "currency": "CNY", "note": "费率最低 0.65%/年" },
+    { "code": "050025", "name": "博时标普500ETF联接 A", "firm": "博时", "currency": "CNY", "note": "规模最大" }
+  ]
+}
+```
+
+### 5. 等待自动运行
+
+GitHub Actions 会在工作日自动运行：
+- 9:20、11:20、13:20 检测额度变动
+- 15:10 推送当日汇总
+
+### 6. 手动测试
+
+你也可以手动触发工作流测试：
+1. 进入 **Actions** 选项卡
+2. 选择 **标普500场外额度监控** 工作流
+3. 点击 **Run workflow**，选择 `force-notify` 模式
+4. 点击绿色的 **Run workflow** 按钮
+
+## 快速开始（原作者/直接使用）
 
 ### 1. 配置推送渠道
 
