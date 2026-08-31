@@ -1,0 +1,131 @@
+{
+  "updated_at": "2026-08-31 14:23:25",
+  "funds": {
+    "017641": {
+      "status": "限大额",
+      "limit_num": 10.0,
+      "limit_raw": "10.00元",
+      "name": "摩根标普500指数(QDII) 人民币A"
+    },
+    "019305": {
+      "status": "限大额",
+      "limit_num": 10.0,
+      "limit_raw": "10.00元",
+      "name": "摩根标普500指数(QDII) 人民币C"
+    },
+    "017643": {
+      "status": "限大额",
+      "limit_num": null,
+      "limit_raw": null,
+      "name": "摩根标普500指数(QDII) 美汇"
+    },
+    "017642": {
+      "status": "限大额",
+      "limit_num": null,
+      "limit_raw": null,
+      "name": "摩根标普500指数(QDII) 美钞"
+    },
+    "050025": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "博时标普500ETF联接 A"
+    },
+    "006075": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "博时标普500ETF联接 C"
+    },
+    "018738": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": null,
+      "name": "博时标普500ETF联接 E(人民币)"
+    },
+    "013425": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": null,
+      "name": "博时标普500ETF联接 美元汇A"
+    },
+    "013499": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": null,
+      "name": "博时标普500ETF联接 美元汇C"
+    },
+    "161125": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "10.00元",
+      "name": "易方达标普500指数(QDII-LOF) 人民币A"
+    },
+    "012860": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "10.00元",
+      "name": "易方达标普500指数(QDII-LOF) 人民币C"
+    },
+    "003718": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "0美元",
+      "name": "易方达标普500指数 美元汇A"
+    },
+    "012861": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "0美元",
+      "name": "易方达标普500指数 美元汇C"
+    },
+    "007721": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "天弘标普500发起(QDII-FOF) A"
+    },
+    "007722": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "天弘标普500发起(QDII-FOF) C"
+    },
+    "022523": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": null,
+      "name": "天弘标普500发起(QDII-FOF) D"
+    },
+    "018064": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "华夏标普500ETF发起式联接(QDII) A人民币"
+    },
+    "018065": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "100.00元",
+      "name": "华夏标普500ETF发起式联接(QDII) C"
+    },
+    "018066": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": null,
+      "name": "华夏标普500ETF发起式联接(QDII) A美元"
+    },
+    "017028": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "1.00万元",
+      "name": "国泰标普500ETF发起联接(QDII) A人民币"
+    },
+    "017030": {
+      "status": "暂停申购",
+      "limit_num": 0.0,
+      "limit_raw": "1.00万元",
+      "name": "国泰标普500ETF发起联接(QDII) C人民币"
+    }
+  }
+}

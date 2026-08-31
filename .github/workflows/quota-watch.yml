@@ -1,0 +1,80 @@
+name: 标普500场外额度监控
+
+on:
+  schedule:
+    # GitHub Actions 的 cron 用 UTC。北京时间 = UTC + 8
+    # 周一到周五，北京 9:20 / 11:20 / 13:20 检测变动
+    - cron: '20 1,3,5 * * 1-5'
+    # 北京 15:10 —— 收盘后固定发一条当日额度汇总，确保长期不提醒也不会漏
+    - cron: '10 7 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: '运行模式'
+        required: true
+        default: 'print'
+        type: choice
+        options:
+          - print          # 只打印当前额度表，不推送
+          - init           # 重建基线快照
+          - force-notify   # 立即推一条完整汇总
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sp500-quota-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 恢复历史快照
+        # 快照已提交在仓库 data/state.json 里，检出即恢复；此步兜底
+        run: |
+          mkdir -p data
+          [ -f data/state.json ] && echo "已有快照：$(cat data/state.json | head -c 120)" || echo "无快照，本次将建立基线"
+
+      - name: 运行监控
+        env:
+          SCT_KEY: ${{ secrets.SCT_KEY }}
+          BARK_KEY: ${{ secrets.BARK_KEY }}
+          TZ: Asia/Shanghai
+        run: |
+          set -e
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            case "${{ github.event.inputs.mode }}" in
+              print)        python3 sp500_quota_watch.py --print ;;
+              init)         python3 sp500_quota_watch.py --init ;;
+              force-notify) python3 sp500_quota_watch.py --force-notify ;;
+            esac
+          elif [ "${{ github.event.schedule }}" = "10 7 * * 1-5" ]; then
+            # 收盘后固定汇总
+            python3 sp500_quota_watch.py --force-notify
+          else
+            # 常规检测：只在额度变动时推送
+            python3 sp500_quota_watch.py
+          fi
+
+      - name: 回写快照到仓库
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A data/ || true
+          if git diff --cached --quiet; then
+            echo "快照无变化，跳过提交"
+          else
+            git commit -m "chore: 更新额度快照 $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}" || echo "推送失败，下次运行会自行纠正"
+          fi
