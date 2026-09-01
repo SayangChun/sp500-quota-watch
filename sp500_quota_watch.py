@@ -12,7 +12,6 @@
     python3 sp500_quota_watch.py              # 正常运行（对比并推送）
     python3 sp500_quota_watch.py --init       # 只建立基线快照，不推送
     python3 sp500_quota_watch.py --print      # 只打印当前额度表，不写快照不推送
-    python3 sp500_quota_watch.py --force-notify  # 无视变化，强制发一条当前汇总
 """
 
 import argparse
@@ -271,7 +270,6 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--init", action="store_true", help="只建立基线快照，不推送")
     ap.add_argument("--print", dest="do_print", action="store_true", help="只打印当前额度表")
-    ap.add_argument("--force-notify", action="store_true", help="强制推送一条当前汇总")
     ap.add_argument("--dry-notify", action="store_true", help="只打印将要推送的正文，不真发")
     args = ap.parse_args()
 
@@ -314,14 +312,6 @@ def main():
         log("已建立基线快照（%d 只），本次不推送。下次起有变动会提醒。" % len(results))
         print("\n" + render_table(results))
         print("\n" + summarize(results))
-        return
-
-    if args.force_notify:
-        title = "📊 标普500场外额度速览 %s" % now_cst().strftime("%m-%d %H:%M")
-        body = summarize(results) + "\n\n" + render_table(results)
-        notify(title, body)
-        save_state(results)
-        log("已强制推送汇总")
         return
 
     if changes:

@@ -59,8 +59,7 @@ GitHub Actions 会在工作日自动运行：
 你也可以手动触发工作流测试：
 1. 进入 **Actions** 选项卡
 2. 选择 **标普500场外额度监控** 工作流
-3. 点击 **Run workflow**，选择 `force-notify` 模式
-4. 点击绿色的 **Run workflow** 按钮
+3. 点击 **Run workflow** 按钮
 
 ## 快速开始（原作者/直接使用）
 
@@ -101,11 +100,6 @@ python3 sp500_quota_watch.py --print
 python3 sp500_quota_watch.py --init
 ```
 
-### 测试推送
-```bash
-python3 sp500_quota_watch.py --force-notify
-```
-
 ### 正常运行（检测变动并推送）
 ```bash
 python3 sp500_quota_watch.py
@@ -131,4 +125,4 @@ python3 sp500_quota_watch.py
 1. 首次运行会建立基线快照，不会推送
 2. 快照保存在 `data/state.json`，会自动提交到仓库
 3. 如果抓取失败，会沿用旧值避免误报
-4. 工作日 15:10 会固定推送当日汇总，确保长期不提醒也不会漏
+4. 只有当额度变动时才会推送通知
