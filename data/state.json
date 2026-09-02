@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01 14:16:06",
+  "updated_at": "2026-09-02 13:53:49",
   "funds": {
     "017641": {
       "status": "限大额",
@@ -44,20 +44,20 @@
       "name": "易方达标普500指数(QDII-LOF) 人民币C"
     },
     "007721": {
-      "status": "暂停申购",
-      "limit_num": 0.0,
+      "status": "限大额",
+      "limit_num": 100.0,
       "limit_raw": "100.00元",
       "name": "天弘标普500发起(QDII-FOF) A"
     },
     "007722": {
-      "status": "暂停申购",
-      "limit_num": 0.0,
+      "status": "限大额",
+      "limit_num": 100.0,
       "limit_raw": "100.00元",
       "name": "天弘标普500发起(QDII-FOF) C"
     },
     "022523": {
-      "status": "暂停申购",
-      "limit_num": 0.0,
+      "status": "限大额",
+      "limit_num": null,
       "limit_raw": null,
       "name": "天弘标普500发起(QDII-FOF) D"
     },
