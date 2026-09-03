@@ -24,8 +24,14 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
+# 设置标准输出编码为UTF-8
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FUNDS_FILE = os.path.join(BASE_DIR, "funds.json")
+README_FILE = os.path.join(BASE_DIR, "README.md")
 STATE_FILE = os.path.join(BASE_DIR, "data", "state.json")
 LOG_FILE = os.path.join(BASE_DIR, "data", "history.log")
 CST = timezone(timedelta(hours=8))
@@ -216,6 +222,48 @@ def render_table(results):
     return "\n".join(lines)
 
 
+def update_readme(results):
+    """更新README.md中的实时额度表格"""
+    try:
+        with open(README_FILE, encoding="utf-8") as f:
+            content = f.read()
+        
+        # 找到实时额度部分的开始和结束标记
+        start_marker = "<!-- QUOTA_START -->"
+        end_marker = "<!-- QUOTA_END -->"
+        
+        start_idx = content.find(start_marker)
+        end_idx = content.find(end_marker)
+        
+        if start_idx == -1 or end_idx == -1:
+            # 如果找不到标记，跳过更新
+            return False
+        
+        # 生成新的表格内容
+        table = render_table(results)
+        summary = summarize(results)
+        updated_at = now_cst().strftime("%Y-%m-%d %H:%M:%S")
+        
+        new_content = f"""{start_marker}
+> 最后更新：{updated_at}
+
+{table}
+
+> {summary}
+{end_marker}"""
+        
+        # 替换内容
+        updated_content = content[:start_idx] + new_content + content[end_idx + len(end_marker):]
+        
+        with open(README_FILE, "w", encoding="utf-8") as f:
+            f.write(updated_content)
+        
+        return True
+    except Exception as e:
+        log("更新README.md失败: %s" % str(e))
+        return False
+
+
 def summarize(results):
     buyable = [r for r in results if r["status"] in ("限大额", "开放申购")]
     cn = [r for r in buyable if r["currency"] == "CNY"]
@@ -309,6 +357,7 @@ def main():
 
     if args.init or old is None:
         save_state(results)
+        update_readme(results)
         log("已建立基线快照（%d 只），本次不推送。下次起有变动会提醒。" % len(results))
         print("\n" + render_table(results))
         print("\n" + summarize(results))
@@ -359,6 +408,7 @@ def main():
         log("额度无变动（%s）" % summarize(results))
 
     save_state(results)
+    update_readme(results)
 
 
 if __name__ == "__main__":
