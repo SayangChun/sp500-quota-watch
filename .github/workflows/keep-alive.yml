@@ -1,0 +1,31 @@
+name: Keep Alive
+
+on:
+  schedule:
+    # 每天 UTC 00:05（北京时间 8:05）运行一次，防止仓库因不活跃被禁用
+    - cron: '5 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 提交空更新保持活跃
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M' > .keep-alive
+          git add .keep-alive
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: keep-alive $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+            git push origin "HEAD:${GITHUB_REF_NAME}" || echo "推送失败"
+          fi
