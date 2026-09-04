@@ -225,6 +225,10 @@ def render_table(results):
 def update_readme(results):
     """更新README.md中的实时额度表格"""
     try:
+        if not os.path.exists(README_FILE):
+            log("README.md 不存在，跳过更新")
+            return False
+
         with open(README_FILE, encoding="utf-8") as f:
             content = f.read()
         
@@ -236,7 +240,7 @@ def update_readme(results):
         end_idx = content.find(end_marker)
         
         if start_idx == -1 or end_idx == -1:
-            # 如果找不到标记，跳过更新
+            log("README.md 中未找到 QUOTA_START/QUOTA_END 标记，跳过更新")
             return False
         
         # 生成新的表格内容
@@ -258,6 +262,7 @@ def update_readme(results):
         with open(README_FILE, "w", encoding="utf-8") as f:
             f.write(updated_content)
         
+        log("README.md 额度表格已更新（%s）" % updated_at)
         return True
     except Exception as e:
         log("更新README.md失败: %s" % str(e))
