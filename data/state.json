@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-07 21:38:32",
+  "updated_at": "2026-09-08 13:58:48",
   "funds": {
     "017641": {
       "status": "限大额",
@@ -56,8 +56,8 @@
       "name": "天弘标普500发起(QDII-FOF) C"
     },
     "022523": {
-      "status": "暂停申购",
-      "limit_num": 0.0,
+      "status": "限大额",
+      "limit_num": null,
       "limit_raw": null,
       "name": "天弘标普500发起(QDII-FOF) D"
     },
